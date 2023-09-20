@@ -1,7 +1,6 @@
 package com.example.MyBookShopApp.Data;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,26 +10,17 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public BookService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
-
 
 
     public List<Book> getBooksData() {
-        List<Book> books = jdbcTemplate.query("SELECT * FROM books",(ResultSet rs, int rowNum)->{
-            Book book = new Book();
-            book.setId(rs.getInt("id"));
-            book.setAuthor(rs.getString("author"));
-            book.setTitle(rs.getString("title"));
-            book.setAuthor_id(rs.getInt("author_id"));
-            book.setPrice_old(rs.getString("price_old"));
-            book.setPrice(rs.getString("price"));
-            return book;
-                });
-        return new ArrayList<>(books);
+        return bookRepository.findAll();
     }
+
+
 }

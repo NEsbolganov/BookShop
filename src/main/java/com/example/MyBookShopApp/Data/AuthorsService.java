@@ -28,7 +28,6 @@ public class AuthorsService {
             author.setId(rs.getInt("id"));
             author.setFirst_name(rs.getString("first_name"));
             author.setLast_name(rs.getString("last_name"));
-            author.setFull_name();
             return author;
         });
         return authors.stream().collect(Collectors.groupingBy((Author a) -> {return a.getLast_name().substring(0,1);}));

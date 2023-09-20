@@ -1,12 +1,21 @@
 package com.example.MyBookShopApp.Data;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "books")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String title;
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private Author author;
     private String price_old;
     private String price;
-    private Integer author_id;
+    //private Integer author_id;
 
     @Override
     public String toString() {
@@ -16,7 +25,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", price_old='" + price_old + '\'' +
                 ", price='" + price + '\'' +
-                ", author_id=" + author_id +
                 '}';
     }
 
@@ -36,11 +44,11 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -60,11 +68,11 @@ public class Book {
         this.price = price;
     }
 
-    public Integer getAuthor_id() {
-        return author_id;
-    }
-
-    public void setAuthor_id(Integer author_id) {
-        this.author_id = author_id;
-    }
+//    public Integer getAuthor_id() {
+//        return author_id;
+//    }
+//
+//    public void setAuthor_id(Integer author_id) {
+//        this.author_id = author_id;
+//    }
 }
