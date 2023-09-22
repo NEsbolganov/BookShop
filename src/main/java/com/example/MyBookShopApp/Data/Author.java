@@ -11,6 +11,15 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Column(name = "slug")
+    private String slug;
+
+    @Column(columnDefinition = "TEXT", name = "description")
+    private String description;
     private String first_name;
     private String last_name;
 
@@ -52,5 +61,29 @@ public class Author {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
