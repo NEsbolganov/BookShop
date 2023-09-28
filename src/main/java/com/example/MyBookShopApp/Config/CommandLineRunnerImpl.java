@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.logging.Logger;
 
-@Configuration
+//@Configuration
 public class CommandLineRunnerImpl implements CommandLineRunner {
     TestEntityCrudRepository testEntityCrudRepository;
 
-    @Autowired
+//    @Autowired
     public CommandLineRunnerImpl(TestEntityCrudRepository testEntityCrudRepository) {
         this.testEntityCrudRepository = testEntityCrudRepository;
     }
