@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.MyBookShopApp.Data.*;
+import com.example.MyBookShopApp.Data.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,28 @@ public class MainController {
         return bookService.getPageOfRecommendedBooks(0,6).getContent();
     }
 
+    @ModelAttribute("recentBooks")
+    public List<Book> recentBooks(){
+        return bookService.getPageOfRecommendedBooks(0,6).getContent();
+    }
+
+    @ModelAttribute("popularBooks")
+    public List<Book> popularBooks(){
+        return bookService.getPageOfRecommendedBooks(0,6).getContent();
+    }
+
+    @GetMapping("/books/popular")
+    @ResponseBody
+    public BooksPageDto getPopularBooksPage(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit){
+        return new BooksPageDto(bookService.getPageOfRecommendedBooks(offset,limit).getContent());
+    }
+
+//    @GetMapping("/books/recent")
+//    @ResponseBody
+//    public BooksPageDto getRecentBooksPage(@RequestParam("offset") Integer offset,
+//                                           @RequestParam("limit") Integer limit){
+//        return new BooksPageDto(bookService.getPageOfRecommendedBooks(offset,limit).getContent());
+//    }
 
     @GetMapping("/")
     public String mainPage(){
@@ -39,7 +62,6 @@ public class MainController {
 
     @GetMapping(value = {"/search", "/search/{searchWord}"})
     public String getSearchResults(@PathVariable(value = "searchWord",required = false) String searchWordDto, Model model){
-//        Logger.getLogger(MainController.class.getSimpleName()).info(searchWordDto.getExample());
         model.addAttribute("searchWordDto", searchWordDto);
         model.addAttribute("searchResults", bookService.getPageOfSearchResultBooks(searchWordDto,0,5).getContent());
         return "/search/index";

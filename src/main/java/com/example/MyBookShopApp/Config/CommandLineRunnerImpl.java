@@ -1,18 +1,8 @@
 package com.example.MyBookShopApp.Config;
 
 import com.example.MyBookShopApp.Data.TestEntity;
-import com.example.MyBookShopApp.Data.TestEntityCrudRepository;
-import com.example.MyBookShopApp.Data.TestEntityDao;
-import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.HibernateError;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.MyBookShopApp.Data.Repositories.TestEntityCrudRepository;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.logging.Logger;
 
 //@Configuration
 public class CommandLineRunnerImpl implements CommandLineRunner {

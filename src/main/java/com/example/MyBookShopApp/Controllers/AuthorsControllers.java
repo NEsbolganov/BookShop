@@ -1,18 +1,17 @@
 package com.example.MyBookShopApp.Controllers;
 
-import com.example.MyBookShopApp.Data.Author;
-import com.example.MyBookShopApp.Data.AuthorsService;
+import com.example.MyBookShopApp.Data.*;
 //import io.swagger.annotations.Api;
 //import io.swagger.annotations.ApiModel;
 //import io.swagger.annotations.ApiOperation;
+import com.example.MyBookShopApp.Data.Services.AuthorsService;
+import com.example.MyBookShopApp.Data.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +20,12 @@ import java.util.Map;
 public class AuthorsControllers {
 
     private final AuthorsService authorsService;
+    private final BookService bookService;
 
     @Autowired
-    public AuthorsControllers(AuthorsService authorsService) {
+    public AuthorsControllers(AuthorsService authorsService, BookService bookService) {
         this.authorsService = authorsService;
+        this.bookService = bookService;
     }
 
     @ModelAttribute("authorsMap")
@@ -42,5 +43,16 @@ public class AuthorsControllers {
     @ResponseBody
     public Map<String, List<Author>> authors(){
         return authorsService.getAuthorsMap();
+    }
+
+
+    @ModelAttribute("searchWordDto")
+    public SearchWordDto searchWordDto(){
+        return new SearchWordDto();
+    }
+
+    @ModelAttribute("searchResults")
+    public List<Book> searchResults(){
+        return new ArrayList<>();
     }
 }
