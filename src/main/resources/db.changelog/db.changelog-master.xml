@@ -6,4 +6,29 @@
 
     <include file="db.changelog/db.changelog_init.xml"/>
 
+    <changeSet author="esbolganovnartai" id="1695385517575-40">
+        <addColumn tableName="books">
+            <column name="popularity" type="double"/>
+        </addColumn>
+        <addColumn tableName="books">
+            <column name="bought" type="double"/>
+        </addColumn>
+        <addColumn tableName="books">
+            <column name="cart" type="double"/>
+        </addColumn>
+        <addColumn tableName="books">
+            <column name="postponed" type="double"/>
+        </addColumn>
+    </changeSet>
+
+    <include file="/updatePopularity.sql"/>
+
+    <include file="db.changelog/db.changelog-TagTable.xml"/>
+
+    <include file="/tags.sql"/>
+
+    <include file="db.changelog/db.changelog-AuthorsTableFullDescription.xml"/>
+
+    <include file="db.changelog/db.changelog-Book2Genre.xml"/>
+
 </databaseChangeLog>

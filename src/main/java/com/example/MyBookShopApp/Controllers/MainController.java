@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.example.MyBookShopApp.Data.*;
 import com.example.MyBookShopApp.Data.Services.BookService;
+import com.example.MyBookShopApp.Data.Services.TagService;
+import com.example.MyBookShopApp.Data.book.TagEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     private final BookService bookService;
+    private final TagService tagService;
 
     @Autowired
-    public MainController(BookService bookService) {
+    public MainController(BookService bookService, TagService tagService) {
         this.bookService = bookService;
+        this.tagService = tagService;
     }
 
     @ModelAttribute("recommendedBooks")
@@ -33,13 +37,19 @@ public class MainController {
 
     @ModelAttribute("popularBooks")
     public List<Book> popularBooks(){
-        return bookService.getPageOfRecommendedBooks(0,6).getContent();
+        return bookService.getPageOfPopularBooks(0,6).getContent();
+    }
+
+
+    @ModelAttribute("tagsList")
+    public List<TagEntity> tagList(){
+        return tagService.getTagsList();
     }
 
     @GetMapping("/books/popular")
     @ResponseBody
     public BooksPageDto getPopularBooksPage(@RequestParam("offset") Integer offset, @RequestParam("limit") Integer limit){
-        return new BooksPageDto(bookService.getPageOfRecommendedBooks(offset,limit).getContent());
+        return new BooksPageDto(bookService.getPageOfPopularBooks(offset,limit).getContent());
     }
 
 //    @GetMapping("/books/recent")

@@ -32,6 +32,17 @@ public class Author {
     @JsonIgnore
     private List<Book> bookList = new ArrayList<>();
 
+    @Column(name = "full_description")
+    private String full_description;
+
+    public String getFull_description() {
+        return full_description;
+    }
+
+    public void setFull_description(String full_description) {
+        this.full_description = full_description;
+    }
+
     public List<Book> getBookList() {
         return bookList;
     }

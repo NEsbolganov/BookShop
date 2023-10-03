@@ -2,10 +2,12 @@ package com.example.MyBookShopApp.Data.Services;
 
 import com.example.MyBookShopApp.Data.Book;
 import com.example.MyBookShopApp.Data.Repositories.BookRepository;
+import com.example.MyBookShopApp.Data.genre.GenreEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -46,5 +48,18 @@ public class BookService {
         return bookRepository.findBooksByPub_dateBetweenOrderByPub_dateDesc(fromDate,toDate,nextPage);
     }
 
+    public Page<Book> getPageOfPopularBooks(Integer offset, Integer limit){
+        Pageable nextPage = PageRequest.of(offset,limit, Sort.by("popularity").descending());
+        return bookRepository.findAll(nextPage);
+    }
 
+    public List<Book> getAuthorsBooks(Integer id){
+        return bookRepository.findBooksByAuthorId(id);
+    }
+
+
+    public Page<Book> getBooksByGenreId(Integer offset, Integer limit, Integer genreId) {
+        Pageable nextPage = PageRequest.of(offset,limit);
+        return bookRepository.findBooksByGenre_id(nextPage,genreId);
+    }
 }

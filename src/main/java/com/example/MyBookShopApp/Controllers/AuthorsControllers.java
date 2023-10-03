@@ -45,6 +45,22 @@ public class AuthorsControllers {
         return authorsService.getAuthorsMap();
     }
 
+    @GetMapping("/authors/{slug}")
+    public String authorPage(@PathVariable("slug")String slug, Model model){
+        model.addAttribute("author", authorsService.getAuthorBySlug(slug));
+        Integer authorId =  authorsService.getAuthorIdBySlug(slug);
+        model.addAttribute("authorsBooks",bookService.getAuthorsBooks(authorId));
+        return "/authors/slug";
+    }
+
+    @GetMapping("/books/author/{slug}")
+    public String authorsBooks(@PathVariable("slug") String slug, Model model){
+        Integer authorId =  authorsService.getAuthorIdBySlug(slug);
+        model.addAttribute("author", authorsService.getAuthorBySlug(slug));
+        model.addAttribute("authorsBooks",bookService.getAuthorsBooks(authorId));
+        return "/books/author";
+    }
+
 
     @ModelAttribute("searchWordDto")
     public SearchWordDto searchWordDto(){

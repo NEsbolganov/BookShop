@@ -24,6 +24,57 @@ public class Book {
     private Integer price;
     //private Integer author_id;
 
+    @Column(name = "popularity", columnDefinition = "double")
+    private Double popularity;
+    @Column(name = "bought", columnDefinition = "double")
+    private Double bought;
+    @Column(name="cart", columnDefinition = "double")
+    private Double cart;
+    @Column(name = "postponed", columnDefinition = "double")
+    private Double postponed;
+
+    @Column(name="genre_id")
+    private Integer genre_id;
+
+    public Integer getGenre_id() {
+        return genre_id;
+    }
+
+    public void setGenre_id(Integer genre_id) {
+        this.genre_id = genre_id;
+    }
+
+    public Double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Double popularity) {
+        this.popularity = popularity;
+    }
+
+    public Double getBought() {
+        return bought;
+    }
+
+    public void setBought(Double bought) {
+        this.bought = bought;
+    }
+
+    public Double getCart() {
+        return cart;
+    }
+
+    public void setCart(Double cart) {
+        this.cart = cart;
+    }
+
+    public Double getPostponed() {
+        return postponed;
+    }
+
+    public void setPostponed(Double postponed) {
+        this.postponed = postponed;
+    }
 
     @Override
     public String toString() {
