@@ -31,4 +31,6 @@
 
     <include file="db.changelog/db.changelog-Book2Genre.xml"/>
 
+    <include file="db.changelog/db.changelog-BookFile.xml"/>
+
 </databaseChangeLog>
